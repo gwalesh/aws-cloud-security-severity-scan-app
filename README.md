@@ -1,4 +1,4 @@
-# Cloud Security Monitoring Application
+# AWS Cloud Security/Severity/Finding Monitoring APP
 
 A full-stack cloud security monitoring application that analyzes AWS resources for common security misconfigurations and provides AI-generated explanations and remediation steps.
 
