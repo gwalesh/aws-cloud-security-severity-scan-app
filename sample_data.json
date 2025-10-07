@@ -1,0 +1,240 @@
+[
+  {
+    "type": "s3",
+    "name": "public-data-bucket",
+    "account_id": "123456789012",
+    "properties": {
+      "public": true,
+      "region": "us-east-1",
+      "tags": {
+        "Environment": "prod",
+        "Owner": "data-team"
+      }
+    }
+  },
+  {
+    "type": "s3",
+    "name": "private-backup-bucket",
+    "account_id": "123456789012",
+    "properties": {
+      "public": false,
+      "region": "us-west-2",
+      "tags": {
+        "Environment": "prod",
+        "Backup": "true"
+      }
+    }
+  },
+  {
+    "type": "s3",
+    "name": "website-assets",
+    "account_id": "123456789012",
+    "properties": {
+      "public": true,
+      "region": "us-east-1",
+      "tags": {
+        "Environment": "prod",
+        "PublicAllowed": "true",
+        "Purpose": "static-website"
+      }
+    }
+  },
+  {
+    "type": "iam_user",
+    "name": "john.doe",
+    "account_id": "123456789012",
+    "properties": {
+      "access_key_age_days": 45,
+      "last_login": "2024-01-15T10:30:00Z",
+      "permissions": ["s3:GetObject", "s3:PutObject"]
+    }
+  },
+  {
+    "type": "iam_user",
+    "name": "service-account",
+    "account_id": "123456789012",
+    "properties": {
+      "access_key_age_days": 150,
+      "last_login": "2023-11-01T08:00:00Z",
+      "permissions": ["ec2:DescribeInstances", "rds:DescribeDBInstances"]
+    }
+  },
+  {
+    "type": "iam_user",
+    "name": "admin.user",
+    "account_id": "123456789012",
+    "properties": {
+      "access_key_age_days": 200,
+      "last_login": "2024-01-20T14:22:00Z",
+      "permissions": ["*"]
+    }
+  },
+  {
+    "type": "security_group",
+    "name": "web-servers-sg",
+    "account_id": "123456789012",
+    "properties": {
+      "vpc_id": "vpc-12345678",
+      "ingress_rules": [
+        {
+          "from_port": 80,
+          "to_port": 80,
+          "protocol": "tcp",
+          "cidr_blocks": ["0.0.0.0/0"]
+        },
+        {
+          "from_port": 443,
+          "to_port": 443,
+          "protocol": "tcp",
+          "cidr_blocks": ["0.0.0.0/0"]
+        }
+      ]
+    }
+  },
+  {
+    "type": "security_group",
+    "name": "database-sg",
+    "account_id": "123456789012",
+    "properties": {
+      "vpc_id": "vpc-12345678",
+      "ingress_rules": [
+        {
+          "from_port": 22,
+          "to_port": 22,
+          "protocol": "tcp",
+          "cidr_blocks": ["0.0.0.0/0"]
+        },
+        {
+          "from_port": 3389,
+          "to_port": 3389,
+          "protocol": "tcp",
+          "cidr_blocks": ["0.0.0.0/0"]
+        }
+      ]
+    }
+  },
+  {
+    "type": "security_group",
+    "name": "secure-app-sg",
+    "account_id": "123456789012",
+    "properties": {
+      "vpc_id": "vpc-12345678",
+      "ingress_rules": [
+        {
+          "from_port": 22,
+          "to_port": 22,
+          "protocol": "tcp",
+          "cidr_blocks": ["10.0.0.0/8"]
+        },
+        {
+          "from_port": 0,
+          "to_port": 65535,
+          "protocol": "tcp",
+          "cidr_blocks": ["10.0.1.0/24"]
+        }
+      ]
+    }
+  },
+  {
+    "type": "rds",
+    "name": "production-database",
+    "account_id": "123456789012",
+    "properties": {
+      "engine": "mysql",
+      "version": "8.0",
+      "instance_class": "db.t3.medium",
+      "publicly_accessible": true,
+      "encryption": true,
+      "backup_retention": 7
+    }
+  },
+  {
+    "type": "rds",
+    "name": "staging-database",
+    "account_id": "123456789012",
+    "properties": {
+      "engine": "postgresql",
+      "version": "13.7",
+      "instance_class": "db.t3.small",
+      "publicly_accessible": false,
+      "encryption": true,
+      "backup_retention": 3
+    }
+  },
+  {
+    "type": "rds",
+    "name": "analytics-db",
+    "account_id": "123456789012",
+    "properties": {
+      "engine": "mysql",
+      "version": "8.0",
+      "instance_class": "db.r5.large",
+      "publicly_accessible": true,
+      "encryption": false,
+      "backup_retention": 14
+    }
+  },
+  {
+    "type": "ec2",
+    "name": "web-server-01",
+    "account_id": "123456789012",
+    "properties": {
+      "instance_type": "t3.medium",
+      "state": "running",
+      "volumes": [
+        {
+          "volume_id": "vol-12345678",
+          "size": 20,
+          "encrypted": true,
+          "volume_type": "gp3"
+        },
+        {
+          "volume_id": "vol-87654321",
+          "size": 100,
+          "encrypted": true,
+          "volume_type": "gp3"
+        }
+      ]
+    }
+  },
+  {
+    "type": "ec2",
+    "name": "database-server",
+    "account_id": "123456789012",
+    "properties": {
+      "instance_type": "r5.large",
+      "state": "running",
+      "volumes": [
+        {
+          "volume_id": "vol-11111111",
+          "size": 50,
+          "encrypted": false,
+          "volume_type": "gp2"
+        },
+        {
+          "volume_id": "vol-22222222",
+          "size": 200,
+          "encrypted": false,
+          "volume_type": "gp2"
+        }
+      ]
+    }
+  },
+  {
+    "type": "ec2",
+    "name": "backup-server",
+    "account_id": "123456789012",
+    "properties": {
+      "instance_type": "t3.small",
+      "state": "stopped",
+      "volumes": [
+        {
+          "volume_id": "vol-33333333",
+          "size": 500,
+          "encrypted": true,
+          "volume_type": "gp3"
+        }
+      ]
+    }
+  }
+]
