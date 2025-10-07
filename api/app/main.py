@@ -12,7 +12,7 @@ from .generator import AIGenerator
 from .database import get_db, save_finding, get_findings, get_finding_by_id, clear_findings
 
 app = FastAPI(
-    title="Cloud Security Monitoring API",
+    title="AWS Cloud Security/Severity/Finding Monitoring APP",
     description="API for detecting and analyzing AWS security misconfigurations",
     version="1.0.0"
 )
