@@ -244,10 +244,3 @@ For questions or issues, please open a GitHub issue or contact the development t
 ---
 
 **Note**: This application is designed for demonstration purposes and uses mock AI generation. In a production environment, you would integrate with actual AI services and AWS APIs for real-time security monitoring.
-
-🎯 Ready to Use
-The application is now complete and ready for demonstration. You can:
-Start the backend: cd api && python -m app.main
-Open the frontend: Open web/index.html in your browser
-Upload sample data: Use the provided sample_data.json file
-Run tests: cd tests && python -m pytest -v
